@@ -12,7 +12,7 @@ namespace DragonsLair_1
             {
                 return winterTournament;
             }
-            return null;
+            return winterTournament; //change back later..just testing purps
         }
     }
 }
