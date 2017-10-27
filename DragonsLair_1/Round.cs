@@ -7,8 +7,6 @@ namespace DragonsLair_1
     {
         private List<Match> matches = new List<Match>();
 
-
-        
         public void AddMatch(Match m)
         {
             matches.Add(m);
@@ -16,11 +14,7 @@ namespace DragonsLair_1
 
         public Match GetMatch(string teamName1, string teamName2)
         {
-            int numOfMatches = matches.Count;
-            for (int i = 0; i < numOfMatches; i++)
-            {
-                
-            }
+            
 
             // TODO: Implement this method
             return null;

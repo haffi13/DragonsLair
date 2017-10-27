@@ -29,7 +29,7 @@ namespace DragonsLair_1
         {
             return 3;
         }
-        
+
         public Round GetRound(int idx)
         {
             Round r = new Round();
