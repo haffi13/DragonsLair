@@ -7,7 +7,7 @@ namespace DragonsLair_1
     {
         private TournamentRepo tournamentRepository = new TournamentRepo();
         Round round = new Round();
-              
+        Random ran = new Random();
 
         public void ShowScore(string tournamentName)
         {
@@ -41,12 +41,13 @@ namespace DragonsLair_1
             }
             if(teamsNextRound.Count % 2 != 0)
             {
-                //if odd bump one team
+                Team freeRider = CheckFreeRider(teamsNextRound);
+                round.GetMatch(freeRider.Name, string.Empty);
+                teamsNextRound.Remove(freeRider);
             }
             int teamsRemainingInRound = teamsNextRound.Count;
-            for (int i = teamsRemainingInRound; i > 0; i-=2)
+            for (int i = teamsRemainingInRound; i > 1; i-=2)
             {
-                Random ran = new Random();
                 int p1 = ran.Next(0, i+1);
                 int p2 = ran.Next(0, i+1);
                 while (p1 == p2)
@@ -57,6 +58,19 @@ namespace DragonsLair_1
                 teamsNextRound.RemoveAt(p1);
                 teamsNextRound.RemoveAt(p2);
             }
+        }
+
+        public Team CheckFreeRider(List<Team> teamsNextRound)
+        {
+            int freeRiderIdx;
+            int numOfTeamsNextRound = teamsNextRound.Count;
+
+            do
+            {
+                freeRiderIdx = ran.Next(0, numOfTeamsNextRound + 1);
+            } while (round.GetFreeRider(teamsNextRound[freeRiderIdx]));//keeps going while false, GetFreeRider returns bool
+            return teamsNextRound[freeRiderIdx];
+
 
         }
 

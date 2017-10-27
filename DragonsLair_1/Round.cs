@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DragonsLair_1
@@ -12,12 +13,24 @@ namespace DragonsLair_1
             matches.Add(m);
         }
 
-        public Match GetMatch(string teamName1, string teamName2)
+        public void GetMatch(string teamName1, string teamName2)
         {
-            
-
-            // TODO: Implement this method
-            return null;
+            Random ran = new Random();
+            int randomWinner = ran.Next(0, 2);
+            string winner;
+            if(randomWinner < 1 && teamName2 != string.Empty)
+            {
+                winner = teamName2;   
+            }
+            else
+            {
+                winner = teamName1;
+            }
+            Match match = new Match();
+            match.FirstOpponent = new Team(teamName1);
+            match.SecondOpponent = new Team(teamName2);
+            match.Winner = new Team(winner);
+            AddMatch(match);
         }
 
         public bool IsMatchesFinished()
@@ -61,6 +74,36 @@ namespace DragonsLair_1
                 }
             }
             return losingTeamList;
+        }
+
+        public bool GetFreeRider(Team freeRiderTeam)
+        {
+            bool containsFreeRider;
+            List<Team> freeRiderTeamList = new List<Team>();
+            
+            if (!freeRiderTeamList.Contains(freeRiderTeam))
+            {
+                freeRiderTeamList.Add(freeRiderTeam);
+                containsFreeRider = false;
+            }
+            containsFreeRider = true;
+            /*if (freeRiderTeamList == null)
+            {
+                containsFreeRider = false;
+            }
+            foreach (Team item in freeRiderTeamList)
+            {
+                if (freeRiderTeam == item)
+                {
+                    containsFreeRider = true;
+                    
+                }
+
+            }
+                freeRiderTeamList.Add(freeRiderTeam);
+                containsFreeRider = false;
+            */
+            return containsFreeRider;
         }
     }
 }
