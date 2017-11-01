@@ -15,21 +15,11 @@ namespace DragonsLair_1
 
         public void GetMatch(string teamName1, string teamName2)
         {
-            Random ran = new Random();
-            int randomWinner = ran.Next(0, 2);
-            string winner;
-            if(randomWinner < 1 && teamName2 != string.Empty)
-            {
-                winner = teamName2;   
-            }
-            else
-            {
-                winner = teamName1;
-            }
+           
             Match match = new Match();
             match.FirstOpponent = new Team(teamName1);
             match.SecondOpponent = new Team(teamName2);
-            match.Winner = new Team(string.Empty);
+            
             AddMatch(match);
         }
         public void SetWinnerOfEachMatch()
@@ -70,7 +60,7 @@ namespace DragonsLair_1
             
             for (int i = 0; i < matches.Count; i++)
             {
-                if (matches[i].Winner.Name == string.Empty )
+                if (matches[i].Winner.Name == null )
                 { return false; }
             }
             return true;
