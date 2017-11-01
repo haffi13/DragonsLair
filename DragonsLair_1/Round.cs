@@ -25,7 +25,7 @@ namespace DragonsLair_1
         public void SetWinnerOfEachMatch()
         {
             
-            for (int i = 0; i <= matches.Count; i++)
+            for (int i = 0; i <= matches.Count-1; i++)
             {
                 matches[i].Winner = SetWinner(matches[i].FirstOpponent, matches[i].SecondOpponent);
             }
@@ -40,6 +40,7 @@ namespace DragonsLair_1
                 Console.WriteLine("Please enter the name of the winning team");
 
                 Console.WriteLine("Team 1 is " + team1.Name +", and Team 2 is " + team2.Name );
+                Console.WriteLine(" press 1 for " + team1.Name + " to win, " + " press 2 for " + team2.Name + " to win or press 0 if no team have won yet");
                 int winningteam = Convert.ToInt32(Console.ReadLine());
                 if (winningteam == 1)
                 {
@@ -74,8 +75,7 @@ namespace DragonsLair_1
 
         public bool IsMatchesFinished()
         {
-            if (matches.Count == GetWinningTeams().Count && AreTeamWinnersEmpty())
-              
+            if (matches.Count == GetWinningTeams().Count && AreTeamWinnersEmpty()) 
             {
                 return true;
             }
