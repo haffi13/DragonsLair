@@ -45,11 +45,13 @@ namespace DragonsLair_1
                 if (winningteam == 1)
                 {
                     findTheWinningTeam = false;
+                    team1.Score += 1;
                     return team1;
                 }
                 if (winningteam == 2)
                 {
                     findTheWinningTeam = false;
+                    team2.Score += 1;
                     return team2;
                 }
                 else if ( winningteam == 0)
