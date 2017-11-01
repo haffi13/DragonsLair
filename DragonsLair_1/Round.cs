@@ -29,13 +29,56 @@ namespace DragonsLair_1
             Match match = new Match();
             match.FirstOpponent = new Team(teamName1);
             match.SecondOpponent = new Team(teamName2);
-            match.Winner = new Team(winner);
+            match.Winner = new Team(string.Empty);
             AddMatch(match);
+        }
+        public void SetWinnerOfEachMatch()
+        {
+            
+            for (int i = 0; i <= matches.Count; i++)
+            {
+                matches[i].Winner = SetWinner(matches[i].FirstOpponent, matches[i].SecondOpponent);
+            }
+            
+        }
+        public Team SetWinner(Team team1, Team team2)
+        {
+            bool findTheWinningTeam = true;
+            while (findTheWinningTeam)
+            {
+
+                Console.WriteLine("Please enter the name of the winning team");
+                string winningteam = Console.ReadLine();
+                if (winningteam == team1.Name)
+                {
+                    findTheWinningTeam = false;
+                    return team1;
+                }
+                if (winningteam == team2.Name)
+                {
+                    findTheWinningTeam = false;
+                    return team2;
+                }
+                Console.WriteLine("Sorry, the name you entered does not match with any of the teams.");
+            }
+            return team1;
+        }
+        public bool AreTeamWinnersEmpty()
+        {
+            
+            for (int i = 0; i < matches.Count; i++)
+            {
+                if (matches[i].Winner.Name == string.Empty )
+                { return false; }
+            }
+            return true;
+            
         }
 
         public bool IsMatchesFinished()
         {
-            if(matches.Count == GetWinningTeams().Count)
+            if (matches.Count == GetWinningTeams().Count && AreTeamWinnersEmpty())
+              
             {
                 return true;
             }
