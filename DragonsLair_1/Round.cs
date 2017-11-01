@@ -48,13 +48,15 @@ namespace DragonsLair_1
             {
 
                 Console.WriteLine("Please enter the name of the winning team");
+
+                Console.WriteLine("Team 1 is " + team1.Name +", and Team 2 is " + team2.Name );
                 string winningteam = Console.ReadLine();
-                if (winningteam == team1.Name)
+                if (winningteam.ToLower() == team1.Name.ToLower())
                 {
                     findTheWinningTeam = false;
                     return team1;
                 }
-                if (winningteam == team2.Name)
+                if (winningteam.ToLower() == team2.Name.ToLower())
                 {
                     findTheWinningTeam = false;
                     return team2;
@@ -118,34 +120,19 @@ namespace DragonsLair_1
             }
             return losingTeamList;
         }
-
+        public Team FreeRiderTeam { get; set; }
         public bool GetFreeRider(Team freeRiderTeam)
         {
             bool containsFreeRider;
-            List<Team> freeRiderTeamList = new List<Team>();
+           
             
-            if (!freeRiderTeamList.Contains(freeRiderTeam))
+            if (FreeRiderTeam == freeRiderTeam)
             {
-                freeRiderTeamList.Add(freeRiderTeam);
-                containsFreeRider = false;
+                containsFreeRider = true;
             }
-            containsFreeRider = true;
-            /*if (freeRiderTeamList == null)
-            {
-                containsFreeRider = false;
-            }
-            foreach (Team item in freeRiderTeamList)
-            {
-                if (freeRiderTeam == item)
-                {
-                    containsFreeRider = true;
-                    
-                }
-
-            }
-                freeRiderTeamList.Add(freeRiderTeam);
-                containsFreeRider = false;
-            */
+            FreeRiderTeam = freeRiderTeam;
+            containsFreeRider = false;
+           
             return containsFreeRider;
         }
     }
