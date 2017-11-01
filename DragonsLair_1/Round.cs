@@ -13,29 +13,19 @@ namespace DragonsLair_1
             matches.Add(m);
         }
 
-        public void GetMatch(string teamName1, string teamName2)
+        public void GetMatch(Team teamName1, Team teamName2)
         {
-            Random ran = new Random();
-            int randomWinner = ran.Next(0, 2);
-            string winner;
-            if(randomWinner < 1 && teamName2 != string.Empty)
-            {
-                winner = teamName2;   
-            }
-            else
-            {
-                winner = teamName1;
-            }
+           
             Match match = new Match();
-            match.FirstOpponent = new Team(teamName1);
-            match.SecondOpponent = new Team(teamName2);
-            match.Winner = new Team(string.Empty);
+            match.FirstOpponent = teamName1;
+            match.SecondOpponent = teamName2;
+            
             AddMatch(match);
         }
         public void SetWinnerOfEachMatch()
         {
             
-            for (int i = 0; i <= matches.Count; i++)
+            for (int i = 0; i <= matches.Count-1; i++)
             {
                 matches[i].Winner = SetWinner(matches[i].FirstOpponent, matches[i].SecondOpponent);
             }
@@ -50,27 +40,35 @@ namespace DragonsLair_1
                 Console.WriteLine("Please enter the name of the winning team");
 
                 Console.WriteLine("Team 1 is " + team1.Name +", and Team 2 is " + team2.Name );
-                string winningteam = Console.ReadLine();
-                if (winningteam.ToLower() == team1.Name.ToLower())
+                Console.WriteLine(" press 1 for " + team1.Name + " to win, " + " press 2 for " + team2.Name + " to win or press 0 if no team have won yet");
+                int winningteam = Convert.ToInt32(Console.ReadLine());
+                if (winningteam == 1)
                 {
                     findTheWinningTeam = false;
+                    team1.Score += 1;
                     return team1;
                 }
-                if (winningteam.ToLower() == team2.Name.ToLower())
+                if (winningteam == 2)
                 {
                     findTheWinningTeam = false;
+                    team2.Score += 1;
                     return team2;
+                }
+                else if ( winningteam == 0)
+                {
+                    findTheWinningTeam = false;
+                    return null;
                 }
                 Console.WriteLine("Sorry, the name you entered does not match with any of the teams.");
             }
-            return team1;
+            return null;
         }
         public bool AreTeamWinnersEmpty()
         {
             
             for (int i = 0; i < matches.Count; i++)
             {
-                if (matches[i].Winner.Name == string.Empty )
+                if (matches[i].Winner.Name == null )
                 { return false; }
             }
             return true;
@@ -79,8 +77,7 @@ namespace DragonsLair_1
 
         public bool IsMatchesFinished()
         {
-            if (matches.Count == GetWinningTeams().Count && AreTeamWinnersEmpty())
-              
+            if (matches.Count == GetWinningTeams().Count && AreTeamWinnersEmpty()) 
             {
                 return true;
             }
