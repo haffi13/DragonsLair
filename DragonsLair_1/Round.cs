@@ -40,20 +40,25 @@ namespace DragonsLair_1
                 Console.WriteLine("Please enter the name of the winning team");
 
                 Console.WriteLine("Team 1 is " + team1.Name +", and Team 2 is " + team2.Name );
-                string winningteam = Console.ReadLine();
-                if (winningteam.ToLower() == team1.Name.ToLower())
+                int winningteam = Convert.ToInt32(Console.ReadLine());
+                if (winningteam == 1)
                 {
                     findTheWinningTeam = false;
                     return team1;
                 }
-                if (winningteam.ToLower() == team2.Name.ToLower())
+                if (winningteam == 2)
                 {
                     findTheWinningTeam = false;
                     return team2;
                 }
+                else if ( winningteam == 0)
+                {
+                    findTheWinningTeam = false;
+                    return null;
+                }
                 Console.WriteLine("Sorry, the name you entered does not match with any of the teams.");
             }
-            return team1;
+            return null;
         }
         public bool AreTeamWinnersEmpty()
         {
