@@ -46,19 +46,29 @@ namespace DragonsLair_1
                 teamsNextRound.Remove(freeRider);
             }
             int teamsRemainingInRound = teamsNextRound.Count;
-            for (int i = teamsRemainingInRound; i > 1; i-=2)
+            for (int i = teamsRemainingInRound; i >=2; i-=2)
             {
-                int p1 = ran.Next(0, i+1);
-                int p2 = ran.Next(0, i+1);
+                int p1 = ran.Next(0, i);
+                int p2 = ran.Next(0, i);
                 while (p1 == p2)
                 {
                     p2 = ran.Next(0, teamsNextRound.Count);
                 }
                 round.GetMatch(teamsNextRound[p1].Name, teamsNextRound[p2].Name);
-                teamsNextRound.RemoveAt(p1);
-                teamsNextRound.RemoveAt(p2);
+                if (p1 > p2)
+                {
+                    teamsNextRound.RemoveAt(p1);
+                    teamsNextRound.RemoveAt(p2);
+                }
+                else
+                {
+                    teamsNextRound.RemoveAt(p2);
+                    teamsNextRound.RemoveAt(p1);
+                }
+               
             }
         }
+
 
         public Team CheckFreeRider(List<Team> teamsNextRound)
         {
@@ -68,7 +78,7 @@ namespace DragonsLair_1
             do
             {
                 freeRiderIdx = ran.Next(0, numOfTeamsNextRound + 1);
-            } while (round.GetFreeRider(teamsNextRound[freeRiderIdx]));//keeps going while false, GetFreeRider returns bool
+            } while (round.GetFreeRider(teamsNextRound[freeRiderIdx]));
             return teamsNextRound[freeRiderIdx];
 
 
@@ -77,6 +87,11 @@ namespace DragonsLair_1
         public void SaveMatch(string tournamentName, int roundNumber, string team1, string team2, string winningTeam)
         {
             // Do not implement this method
+        }
+
+        public void SetWinner()
+        {
+            round.SetWinnerOfEachMatch();
         }
     }
 }
