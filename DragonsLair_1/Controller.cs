@@ -19,7 +19,6 @@ namespace DragonsLair_1
             foreach (var item in SortedScorelist)
             {
                 Console.WriteLine(item.Name + "    :  " + item.Score);
-
             }
         }
        
