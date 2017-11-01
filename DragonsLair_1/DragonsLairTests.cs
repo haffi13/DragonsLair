@@ -68,7 +68,7 @@ namespace DragonsLair_1
         public void FreeRiderAlwaysWins()
         {
             Round currentRound = new Round();
-            currentRound.GetMatch("RandomTeamName", string.Empty);
+            //currentRound.GetMatch("RandomTeamName", string.Empty);
 
             List<Team> winnerList = currentRound.GetWinningTeams();
 

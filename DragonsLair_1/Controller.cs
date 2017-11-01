@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DragonsLair_1
 {
@@ -8,23 +9,20 @@ namespace DragonsLair_1
         private TournamentRepo tournamentRepository = new TournamentRepo();
         Round round = new Round();
         Random ran = new Random();
+        List<Team> TeamScoreList = new List<Team>();
 
         public void ShowScore(string tournamentName)
         {
-            /*Tournament tournament = tournamentRepository.GetTournament(tournamentName);
-            int numOfRounds = tournament.GetNumberOfRounds();
-            for (int i = 0; i < numOfRounds; i++)
-            {
-                //tournament.GetRound(i);
+            List<Team> SortedScorelist = TeamScoreList.OrderBy(o=>o.Score).ToList();
 
+            Console.WriteLine();
+            foreach (var item in SortedScorelist)
+            {
+                Console.WriteLine(item.Name + "    :  " + item.Score);
 
             }
-            /*
-             * TODO: Calculate for each team how many times they have won
-             * Sort based on number of matches won (descending)
-             */
-            Console.WriteLine("Implement this method!");
         }
+       
 
         public void ScheduleNewRound(string tournamentName, bool printNewMatches = true)
         {
@@ -37,12 +35,13 @@ namespace DragonsLair_1
             }
             else
             {
+                TeamScoreList = tournament.GetTeams();
                 teamsNextRound = tournament.GetTeams();
             }
             if(teamsNextRound.Count % 2 != 0)
             {
                 Team freeRider = CheckFreeRider(teamsNextRound);
-                round.GetMatch(freeRider.Name, string.Empty);
+                round.GetMatch(freeRider, null);
                 teamsNextRound.Remove(freeRider);
             }
             int teamsRemainingInRound = teamsNextRound.Count;
@@ -54,7 +53,7 @@ namespace DragonsLair_1
                 {
                     p2 = ran.Next(0, teamsNextRound.Count);
                 }
-                round.GetMatch(teamsNextRound[p1].Name, teamsNextRound[p2].Name);
+                round.GetMatch(teamsNextRound[p1], teamsNextRound[p2]);
                 if (p1 > p2)
                 {
                     teamsNextRound.RemoveAt(p1);

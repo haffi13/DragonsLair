@@ -13,12 +13,12 @@ namespace DragonsLair_1
             matches.Add(m);
         }
 
-        public void GetMatch(string teamName1, string teamName2)
+        public void GetMatch(Team teamName1, Team teamName2)
         {
            
             Match match = new Match();
-            match.FirstOpponent = new Team(teamName1);
-            match.SecondOpponent = new Team(teamName2);
+            match.FirstOpponent = teamName1;
+            match.SecondOpponent = teamName2;
             
             AddMatch(match);
         }
